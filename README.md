@@ -8,7 +8,7 @@ cd sky-assignment
 go install ./...
 ```
 
-## USAGE
+## Usage
 
 Create a MySQL database
 
@@ -56,4 +56,14 @@ go test ./...
 ```
 
 After running the test you have to manually clean the database.
+
+## Dockerized version
+
+Run `docker-compose up -d` at the application's root directory
+
+It will launch the service and generate data for the past 5 minutes
+
+You can access the API via `http://localhost:8080/api?from=1500000000&to=1600000000` where `from` and `to` are unix timestamps
+
+To stop the service run `docker-compose down -v`
 

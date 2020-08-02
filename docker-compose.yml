@@ -1,4 +1,4 @@
-version: '3.8'
+version: '3.3'
 
 services:
   db:
@@ -14,5 +14,23 @@ services:
       MYSQL_DATABASE: sky
       MYSQL_USER: sky
       MYSQL_PASSWORD: password
+  app:
+    depends_on:
+      - db
+    links:
+      - "db"
+    image: golang:1.14
+    volumes:
+      - .:/go/src/sky-assignment
+    working_dir: /go/src/sky-assignment
+    command: bash -c "go install ./... && skyingestion && skyapi"
+    ports:
+      - "8080:8080"
+    restart: always
+    environment:
+      SKY_DB_HOST: db:3306
+      SKY_DB_USERNAME: sky
+      SKY_DB_PASSWORD: password
+      SKY_DB_DATABASE: sky
 volumes:
   db_data: {}
