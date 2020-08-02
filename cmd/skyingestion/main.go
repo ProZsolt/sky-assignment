@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"math/rand"
 	"os"
+	"strings"
 	"time"
 
 	"github.com/ProZsolt/sky-assignment/pkg/metric"
@@ -31,7 +32,7 @@ func main() {
 			Concurrency: rand.Intn(500001),
 		}
 		err = db.SaveMetric(m)
-		if err != nil {
+		if err != nil && !strings.Contains(err.Error(), "Error 1062") {
 			fmt.Printf("Can't save %v: %v\n", m, err)
 			os.Exit(1)
 		}
