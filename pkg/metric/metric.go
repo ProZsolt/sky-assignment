@@ -1,9 +1,9 @@
 package metric
 
 type Metric struct {
-	Timestamp   int64
-	CPULoad     float32
-	Concurrency int
+	Timestamp   int64   `json:"timestamp"`
+	CPULoad     float32 `json:"cpuLoad"`
+	Concurrency int     `json:"concurrency"`
 }
 
 type MetricLoader interface {
